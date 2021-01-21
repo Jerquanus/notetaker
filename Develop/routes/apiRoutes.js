@@ -30,19 +30,19 @@ module.exports = function(app) {
 
 
     // re-use the code below to create a function that searches for the id to delete it
-    app.get("/api/notes", function(req, res) {
-        var chosen = req.params.character;
+    // app.get("/api/notes", function(req, res) {
+    //     var chosen = req.params.character;
       
-        console.log(chosen);
+    //     console.log(chosen);
       
-        for (var i = 0; i < characters.length; i++) {
-          if (chosen === characters[i].routeName) {
-            return res.json(characters[i]);
-          }
-        }
+    //     for (var i = 0; i < characters.length; i++) {
+    //       if (chosen === characters[i].routeName) {
+    //         return res.json(characters[i]);
+    //       }
+    //     }
       
-        return res.json(false);
-      });
+    //     return res.json(false);
+    //   });
 
 
 
