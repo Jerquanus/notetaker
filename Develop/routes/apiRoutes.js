@@ -7,7 +7,14 @@ var fs = require('fs')
 // start routing
 module.exports = function(app) {
 
+    // need to read notes
+    fs.readFile("../db/db.json", function(err, data){
+        if (err) throw err;
+        
+    });
+
     // API get
+
     app.get("/api/notes", function(req, res) {
 
         console.log('NOTES DATA--->', notesData)
