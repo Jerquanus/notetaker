@@ -13,6 +13,7 @@ module.exports = function(app) {
       res.sendFile(path.join(__dirname, "../public/notes.html"));
     });
   
+  
     // If no match then default to home
     app.get("*", function(req, res) {
       res.sendFile(path.join(__dirname, "../public/index.html"));

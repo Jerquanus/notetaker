@@ -1,20 +1,14 @@
 // Link the Data
 
 var notesData = require("../db/db.json");
-var fs = require('fs')
+var fs = require('fs');
+var id = 1;
 
 // ============
 // start routing
 module.exports = function(app) {
 
-    // need to read notes
-    fs.readFile("../db/db.json", function(err, data){
-        if (err) throw err;
-        
-    });
-
     // API get
-
     app.get("/api/notes", function(req, res) {
 
         console.log('NOTES DATA--->', notesData)
@@ -23,21 +17,31 @@ module.exports = function(app) {
   
     // API POST request
     // fix the code below you want to stringify to the file not the notes
-  
+
     app.post("/api/notes", function(req, res) {
+      
         const newNote = req.body;
-        const data = json.stringify(newNote)
-        notesData.push(newNote);
-        fs.writeFile('./public/notes.html',data,function(err){
+        newNote.id = id;
+        id++;
+        notesData.push(newNote)
+        const data = JSON.stringify(notesData)
+        fs.writeFile('./db/db.json',data,function(err){
             if(err) console.log(err)
             res.json(newNote);
         })
     });
 
+    app.delete("/api/notes/:id", function(req, res) {
+       const idToDelete = req.params.id
+
+       console.log(idToDelete)
+      
+    });
+
 
 
     // re-use the code below to create a function that searches for the id to delete it
-    // app.get("/api/notes", function(req, res) {
+    // app.get("/api/characters/:character", function(req, res) {
     //     var chosen = req.params.character;
       
     //     console.log(chosen);
