@@ -16,7 +16,6 @@ module.exports = function(app) {
     });
   
     // API POST request
-    // fix the code below you want to stringify to the file not the notes
 
     app.post("/api/notes", function(req, res) {
       
@@ -33,7 +32,20 @@ module.exports = function(app) {
 
     app.delete("/api/notes/:id", function(req, res) {
        const idToDelete = req.params.id
+       
+       for (var i = 0; i < notesData.length; i++) {
+              if (idToDelete == notesData[i].id) {
+                notesData.splice(i, 1)
 
+                const data = JSON.stringify(notesData)
+                fs.writeFile('./db/db.json',data,function(err){
+                    if(err) console.log(err)
+                     return res.json(notesData);
+                })
+                return 
+              }
+            }
+       
        console.log(idToDelete)
       
     });
